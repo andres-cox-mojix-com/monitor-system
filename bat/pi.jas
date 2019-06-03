@@ -1,0 +1,48 @@
+echo off
+cls
+echo Espere...
+echo Fecha : %date% > D:\prueba\fyh.txt	Hora : %time%  > D:\prueba\fyh.txt
+for /f "tokens=3 delims= " %%i in (D:\prueba\fyh.txt) do @echo %%i > D:\prueba\f1.txt
+for /f "tokens=1 delims=/" %%i in (D:\prueba\f1.txt) do @echo %%i > D:\prueba\dia.txt
+for /f "tokens=2 delims=/" %%i in (D:\prueba\f1.txt) do @echo %%i > D:\prueba\mes.txt
+for /f "tokens=3 delims=/" %%i in (D:\prueba\f1.txt) do @echo %%i > D:\prueba\ano.txt
+for /f "tokens=6 delims= " %%i in (D:\prueba\fyh.txt) do @echo %%i > D:\prueba\h1.txt
+for /f "tokens=1 delims=:" %%i in (D:\prueba\h1.txt) do @echo %%i > D:\prueba\hora.txt
+rem ----------------------------------------------------------------------------------------------------
+rem	CONSTRUYENDO EL REPORTEDB.TXT CON LOS DATOS PARA LA BASE DE DATOS
+rem ----------------------------------------------------------------------------------------------------
+
+set lista=google twitter yahoo spotify youtube wikipedia shazam arduino kickstarter ieee
+
+Setlocal EnableDelayedExpansion
+
+for /f "tokens=*" %%x in (D:\prueba\dia.txt) do ( set datos1=%%x
+)
+for /f "tokens=*" %%y in (D:\prueba\mes.txt) do ( set datos2=%%y 
+)
+for /f "tokens=*" %%x in (D:\prueba\ano.txt) do ( set datos3=%%x 
+)
+
+(for %%a in (%lista%) do (
+		ping	%%a.com > D:\prueba\reporte.txt
+findstr "ximo" D:\prueba\reporte.txt > D:\prueba\p1.txt
+for /f "tokens=2 delims=," %%i in (D:\prueba\p1.txt) do @echo %%i > D:\prueba\p2.txt
+for /f "tokens=3 delims= " %%i in (D:\prueba\p2.txt) do @echo %%i > D:\prueba\p3.txt
+for /f "tokens=1 delims=m" %%i in (D:\prueba\p3.txt) do @echo %%i > D:\prueba\p%%a.txt
+
+for /f "tokens=*" %%x in (D:\prueba\hora.txt) do (
+  set datos4=%%x
+  for /f "tokens=*" %%y in (D:\prueba\p%%a.txt) do (
+    set datos5=%%y
+ rem echo !datos1!	!datos2!	!datos3!	!datos4!	!datos5!> %%a.txt
+ echo !datos1!	!datos2!	!datos3!	!datos4!	!datos5!> D:\prueba\%%a.txt
+ cd C:\Program Files\MySQL\MySQL Server 5.7\bin\
+ mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'D:/prueba/%%a.txt' into table %%a;"
+
+	)
+	)
+))
+
+del D:\prueba\p*.txt
+del D:\prueba\f*.txt
+del D:\prueba\h1.txt

@@ -1,0 +1,27 @@
+@echo off
+cls
+echo Conectando a la Base de Datos
+cd C:\Program Files\MySQL\MySQL Server 5.7\bin\
+mysql -u root -p0000 -e "create database servicios;" 
+
+mysql -u root -p0000 -D servicios -e "create table google (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table arduino (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table ieee (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table kickstarter (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table shazam (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table spotify (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table twitter (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table wikipedia (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table yahoo (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+mysql -u root -p0000 -D servicios -e "create table youtube (DIA int(2), MES int(2), ANHO int(4), HORA int(2), PING int(3));"
+
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datosgoogle.txt' into table google;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datosarduino.txt' into table arduino;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datosieee.txt' into table ieee;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datoskickstarter.txt' into table kickstarter;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datosshazam.txt' into table shazam;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datosspotify.txt' into table spotify;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datostwitter.txt' into table twitter;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datoswikipedia.txt' into table wikipedia;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datosyahoo.txt' into table yahoo;"
+mysql -u root -p0000 -D servicios -e "LOAD DATA LOCAL INFILE 'C:/inetpub/wwwroot/MonitoreoG15/base de datos/datosyoutube.txt' into table youtube;"
